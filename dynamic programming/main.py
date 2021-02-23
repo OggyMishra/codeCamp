@@ -54,6 +54,5 @@ def fib(n):
 
 # endregion
 
-
 if __name__ == '__main__':
-    fib(29)
+    fib(25)

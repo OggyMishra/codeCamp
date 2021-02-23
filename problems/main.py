@@ -51,3 +51,4 @@ def kaprekarNumbers(p, q):
 
 
 if __name__ == '__main__':
+    kaprekarNumbers(1, 100)

@@ -78,16 +78,6 @@ def kaprekarNumbers(p, q):
 #
 # We see that only S` = [1, 7, 4]
 # will not ever sum to a multiple of k = 3
-
-# !/bin/python3
-
-import math
-import os
-import random
-import re
-import sys
-
-
 #
 # Complete the 'nonDivisibleSubset' function below.
 #
@@ -95,19 +85,33 @@ import sys
 # The function accepts following parameters:
 #  1. INTEGER k
 #  2. INTEGER_ARRAY s
-#
+# https://www.hackerrank.com/challenges/non-divisible-subset/forum
 
 def nonDivisibleSubset(k, s):
     # Write your code here
-    rem_lst = []
-    for item in s:
-        rem_lst += [item % k]
+    # this condition is to make sure we initialize all array index here
+    # this will save us checking value at every index later.
+    rem_lst = [0] * k
 
-    for rem in rem_lst:
+    for item in s:
+        rem_lst[item % k] += 1
+
+    # handle 0 case
+    count = 0
+    count += min(rem_lst[0], 1)
+
+    # handle other cases
+    for i in range(1, k // 2 + 1):  # here divide by 2 is to make sure we don't repeat cases again.
+        if i != k - i:
+            count += max(rem_lst[i], rem_lst[k-i])
+        else:
+            count += 1 if rem_lst[i] > 0 else 0  # case to handle scenarios where value sum = k.
+
+    return count
 
 # endregion
 
 if __name__ == '__main__':
-    s = [1,7, 2, 4]
-    k = 3
-    nonDivisibleSubset(k, s)
+    s = [2375782, 21836421, 2139842193, 2138723, 23816, 21836219, 2948784, 43864923, 283648327, 23874673]
+    k = 13
+    print(nonDivisibleSubset(k, s))

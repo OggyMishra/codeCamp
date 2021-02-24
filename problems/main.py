@@ -49,9 +49,65 @@ def kaprekarNumbers(p, q):
 
 # endregion
 
-# region Organizing Containers of balls
+# region Non Divisible Subset
+# Given a set of distinct integers , print the size of a maximal subset of S
+# where the sum of any 2 numbers in S~ is not evenly divisible by k
+#
+# For example, the array S = [19, 10, 12, 10, 24, 25, 22] and k = 4
+# One of the arrays that can be created is S`=[10, 12, 15]. Another is S``=[19, 22, 24]
+#
+# Sample Input
+#
+# 4 3
+# 1 7 2 4
+#
+# Sample Output
+#
+# 3
+#
+# Explanation
+#
+# The sums of all permutations of two elements from
+# are:
+# 1 + 7 = 8
+# 1 + 2 = 3
+# 1 + 4 = 5
+# 7 + 2 = 9
+# 7 + 4 = 11
+# 2 + 4 = 6
+#
+# We see that only S` = [1, 7, 4]
+# will not ever sum to a multiple of k = 3
+
+# !/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+#
+# Complete the 'nonDivisibleSubset' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER k
+#  2. INTEGER_ARRAY s
+#
+
+def nonDivisibleSubset(k, s):
+    # Write your code here
+    rem_lst = []
+    for item in s:
+        rem_lst += [item % k]
+
+    for rem in rem_lst:
 
 # endregion
 
 if __name__ == '__main__':
-    kaprekarNumbers(1, 100)
+    s = [1,7, 2, 4]
+    k = 3
+    nonDivisibleSubset(k, s)

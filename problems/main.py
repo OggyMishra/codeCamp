@@ -85,9 +85,13 @@ def kaprekarNumbers(p, q):
 # The function accepts following parameters:
 #  1. INTEGER k
 #  2. INTEGER_ARRAY s
+# s = [2375782, 21836421, 2139842193, 2138723, 23816, 21836219, 2948784, 43864923, 283648327, 23874673]
+# k = 13
+# print(nonDivisibleSubset(k, s))
 # https://www.hackerrank.com/challenges/non-divisible-subset/forum
 
 def nonDivisibleSubset(k, s):
+
     # Write your code here
     # this condition is to make sure we initialize all array index here
     # this will save us checking value at every index later.
@@ -111,7 +115,36 @@ def nonDivisibleSubset(k, s):
 
 # endregion
 
+# region matching
+
+def appendAndDelete(s, t, k):
+    s = str(s)
+    t = str(t)
+    diff = 0
+    for i in range(0, min(len(s), len(t))):
+        if s[i] != t[i]:
+            break
+    i += 1
+    diff = len(s) - i + len(t) -i
+    return 'Yes' if (k >= diff and (k - diff) % 2 == 0) or (len(s) + len(t) <= k) else 'No'
+
+# endregion
+
+# region Repeated String
+# There is a string, s, of lowercase English letters that is repeated infinitely many times. Given an integer n,
+# find and print the number of letter a's in the first letters of the infinite string.
+# Example:
+# s = 'abcac'
+# n = 10
+# The substring we consider is abcacabcac he first 10 characters of the infinite string.
+# There are 4 occurrences of a in the substring.
+
+
+def repeatedString(s, n):
+    return s.count('a') * (n // len(s)) + s[:n % len(s)].count('a')
+# endregion
+
 if __name__ == '__main__':
-    s = [2375782, 21836421, 2139842193, 2138723, 23816, 21836219, 2948784, 43864923, 283648327, 23874673]
-    k = 13
-    print(nonDivisibleSubset(k, s))
+    s = 'abcac'
+    n = 10
+    print(repeatedString(s, n))

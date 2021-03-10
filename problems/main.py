@@ -144,7 +144,32 @@ def repeatedString(s, n):
     return s.count('a') * (n // len(s)) + s[:n % len(s)].count('a')
 # endregion
 
+#region Magic numbers
+
+def formingMagicSquare(s):
+    total_sum = []
+    all_magic_sq = [
+        [[8, 1, 6], [3, 5, 7], [4, 9, 2]],
+        [[6, 1, 8], [7, 5, 3], [2, 9, 4]],
+        [[4, 9, 2], [3, 5, 7], [8, 1, 6]],
+        [[2, 9, 4], [7, 5, 3], [6, 1, 8]],
+        [[8, 3, 4], [1, 5, 9], [6, 7, 2]],
+        [[4, 3, 8], [9, 5, 1], [2, 7, 6]],
+        [[6, 7, 2], [1, 5, 9], [8, 3, 4]],
+        [[2, 7, 6], [9, 5, 1], [4, 3, 8]]
+    ]
+
+    for mg in all_magic_sq:
+        sum = 0
+        for mg_row, input_row in zip(mg, s):
+            for sample_mg_no, input_no in zip(mg_row, input_row):
+                sum += abs(sample_mg_no - input_no)
+        total_sum += [sum]
+
+    return min(total_sum)
+
+#endregion
+
 if __name__ == '__main__':
-    s = 'abcac'
-    n = 10
-    print(repeatedString(s, n))
+    s =  [[5, 3, 4], [1, 5, 8], [6, 4, 2]]
+    print(formingMagicSquare(s))

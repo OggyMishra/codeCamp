@@ -170,6 +170,54 @@ def formingMagicSquare(s):
 
 #endregion
 
+#region Encyrption
+
+# Complete the encryption function below.
+import math
+
+def encryption(s):
+    s = s.replace(' ', '')
+    l = len(s)
+    row = math.floor(math.sqrt(l))
+    col = math.ceil(math.sqrt(l))
+
+    # invalid condition
+    if row * col < l:
+        if row < col:
+            row = row + 1
+        elif row == col:
+            col = col + 1
+
+    row_idx = 0
+    input_rows = []
+    output = ''
+
+    while row_idx < row:
+        col_idx = 0
+        rows = []
+        while col_idx < col:
+            col_gap = row_idx * col
+            rows += [s[col_idx + col_gap]] if (col_idx + col_gap) < len(s) else ''
+            col_idx += 1
+        row_idx += 1
+        input_rows += [rows]
+    col_list = []
+
+    # transpose array
+    for i in range(len(input_rows[0])):
+        row = []
+        for item in input_rows:
+            row.append(item[i] if i < len(item) else '')
+        col_list.append(row)
+
+    for val in col_list:
+        output += ''.join(val)
+        output += ' '
+
+    return output
+
+
+#endregion
+
 if __name__ == '__main__':
-    s =  [[5, 3, 4], [1, 5, 8], [6, 4, 2]]
-    print(formingMagicSquare(s))
+    print(encryption('chillout'))

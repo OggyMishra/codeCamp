@@ -241,9 +241,66 @@ def breakPalindrome(input):
         if input[idx] != 'a':
             return input[0: idx] + 'a' + input[idx+1:]
     return input[0: input_len-1] + 'b'
+#endregion
+
+#region Minium Window Substring
+#
+# Given two strings s and t, return the minimum window in s which will contain all the characters in t. If there is no such window in s that covers all characters in t, return the empty string "".
+#
+# Note that If there is such a window, it is guaranteed that there will always be only one unique minimum window in s.
+#
+# Example 1:
+#
+# Input: s = "ADOBECODEBANC", t = "ABC"
+# Output: "BANC"
+#
+# Example 2:
+#
+# Input: s = "a", t = "a"
+# Output: "a"
+#
+
+def get_min_window(s, t):
+    if s == t:
+        return s
+
+    left, right = 0, 0
+
+
+
+    # if t not in s[left, right]:
+
 
 
 #endregion
 
+
+# region synup interview question
+# You are climbing a staircase. It takes n steps to reach to the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+# Eg.
+# Input: 3
+# Output: 3
+#
+#
+# Explanation: There are three ways to climb to the top.
+# 1. 1 step + 1 step + 1 step
+# 2. 1 step + 2 steps
+# 3. 2 steps + 1 step
+#
+# 4
+# 1 1 1 1
+# 2 2
+# 1 2 1
+# 2 1 1
+# 1 1 2
+def ways_to_climb(n):
+    if n == 1:
+        return 1
+    elif n == 2:
+        return 2
+    else:
+        return ways_to_climb(n-1) + ways_to_climb(n-2) # worst case complexity of 2^n
+# endregion
+
 if __name__ == '__main__':
-    print(breakPalindrome('madam'))
+    print(ways_to_climb(10))

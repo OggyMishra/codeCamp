@@ -294,6 +294,7 @@ def get_min_window(s, t):
 # 2 1 1
 # 1 1 2
 
+
 # worst case complexity of 2^n
 def ways_to_climb_using_recursion(n):
     if n == 1:
@@ -303,8 +304,10 @@ def ways_to_climb_using_recursion(n):
     else:
         return ways_to_climb_using_recursion(n-1) + ways_to_climb_using_recursion(n-2)
 
+
 # using dynamic programming
-def ways_to_climb_using_dp(n):
+# tabulation
+def ways_to_climb_using_dp_tabulation(n):
     sum = [0, 1, 2]
     res = 0
     for i in range(3, n+1):
@@ -312,8 +315,18 @@ def ways_to_climb_using_dp(n):
         sum += [res]
     return res
 
+# memoization:
+def ways_to_climb_using_dp_memoization(n, lookup):
+    if n <= 1:
+        lookup[n] = 1
 
+    if lookup[n] is None:
+        lookup[n] = ways_to_climb_using_dp_memoization(n-1, lookup) + ways_to_climb_using_dp_memoization(n - 2, lookup)
+
+    return lookup[n]
 # endregion
 
 if __name__ == '__main__':
-    print(ways_to_climb_using_dp(10))
+    n = 4
+    lookup = [None] * (n+1)
+    print(ways_to_climb_using_dp_memoization(n, lookup))

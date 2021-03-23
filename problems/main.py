@@ -455,6 +455,15 @@ class DoublyLinkedList:
 # endregion
 
 
+# region Hare and Tortoise algo for finding cyclic dependency in linked list
+
+
+def hare_and_tortoise_algo():
+    pass
+
+# endregion
+
+
 if __name__ == '__main__':
    dbly_list = DoublyLinkedList()
    dbly_list.add_list_item(10)

@@ -340,6 +340,7 @@ class DoublyListNode:
         self.next = None
         self.prev = None
 
+
 class SinglyLinkedList:
     def __init__(self):
         self.head = None
@@ -386,7 +387,8 @@ class SinglyLinkedList:
             print(current_node.data)
             current_node = current_node.next
 
-class DoubleyLinkedList:
+
+class DoublyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
@@ -405,18 +407,21 @@ class DoubleyLinkedList:
 
         self.tail = item
 
-
     def remove_list_item(self, item):
-        previous_node = None
         current_node = self.head
         while current_node is not None:
+            previous_node = current_node.prev
+            next_node = current_node.next
             if current_node.data == item:
                 if previous_node is not None:
-                    previous_node.next = current_node.next
+                    previous_node.next = next_node
+                    if next_node is not None:
+                        next_node.prev = previous_node
                 else:
-                    self.head = current_node.next
+                    self.head = next_node
+                    if next_node is not None:
+                        next_node.prev = None
                     return
-            previous_node = current_node
             current_node = current_node.next
 
     def list_length(self):
@@ -435,21 +440,32 @@ class DoubleyLinkedList:
         while current_node is not None:
             print(current_node.data)
             current_node = current_node.next
-
-
+# driver program
+#  linked_list = SinglyLinkedList()
+#     linked_list.add_list_item(10)
+#     linked_list.add_list_item(11)
+#     linked_list.add_list_item(12)
+#     linked_list.add_list_item(13)
+#     linked_list.add_list_item(14)
+#     linked_list.list_items()
+#     linked_list.remove_list_item(13)
+#     print('doom')
+#     linked_list.list_items()
+#     print(linked_list.list_length())
 # endregion
 
 
 if __name__ == '__main__':
-    linked_list = SinglyLinkedList()
-    linked_list.add_list_item(10)
-    linked_list.add_list_item(11)
-    linked_list.add_list_item(12)
-    linked_list.add_list_item(13)
-    linked_list.add_list_item(14)
-    linked_list.list_items()
-    linked_list.remove_list_item(13)
-    print('doom')
-    linked_list.list_items()
-    print(linked_list.list_length())
+   dbly_list = DoublyLinkedList()
+   dbly_list.add_list_item(10)
+   dbly_list.add_list_item(11)
+   dbly_list.add_list_item(12)
+   dbly_list.add_list_item(13)
+   dbly_list.add_list_item(14)
+   dbly_list.list_items()
+   print('doom')
+   dbly_list.remove_list_item(13)
+   dbly_list.list_items()
+
+
 

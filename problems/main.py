@@ -334,6 +334,11 @@ class Node:
         self.data = data
         self.next = None
 
+class DoublyListNode:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
 
 class SinglyLinkedList:
     def __init__(self):
@@ -380,6 +385,58 @@ class SinglyLinkedList:
         while current_node is not None:
             print(current_node.data)
             current_node = current_node.next
+
+class DoubleyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add_list_item(self, item):
+        if not isinstance(item, Node):
+            item = Node(item)
+
+        if self.head is None:
+            self.head = item
+            item.prev = None
+            item.next = None
+        else:
+            self.tail.next = item
+            item.prev = self.tail
+
+        self.tail = item
+
+
+    def remove_list_item(self, item):
+        previous_node = None
+        current_node = self.head
+        while current_node is not None:
+            if current_node.data == item:
+                if previous_node is not None:
+                    previous_node.next = current_node.next
+                else:
+                    self.head = current_node.next
+                    return
+            previous_node = current_node
+            current_node = current_node.next
+
+    def list_length(self):
+        count = 0
+        current_node = self.head
+
+        while current_node is not None:
+            count += 1
+            current_node = current_node.next
+
+        return count
+
+    def list_items(self):
+        current_node = self.head
+
+        while current_node is not None:
+            print(current_node.data)
+            current_node = current_node.next
+
+
 # endregion
 
 

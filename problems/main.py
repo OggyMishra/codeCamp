@@ -326,7 +326,73 @@ def ways_to_climb_using_dp_memoization(n, lookup):
     return lookup[n]
 # endregion
 
+# region Python LinkedList
+
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add_list_item(self, item):
+        if not isinstance(item, Node):
+            item = Node(item)
+
+        if self.head is None:
+            self.head = item
+        else:
+            self.tail.next = item # this is using the Node's next property
+
+        self.tail = item
+
+    def remove_list_item(self, item):
+        previous_node = None
+        current_node = self.head
+        while current_node is not None:
+            if current_node.data == item:
+                if previous_node is not None:
+                    previous_node.next = current_node.next
+                else:
+                    self.head = current_node.next
+                    return
+            previous_node = current_node
+            current_node = current_node.next
+
+    def list_length(self):
+        count = 0
+        current_node = self.head
+
+        while current_node is not None:
+            count += 1
+            current_node = current_node.next
+
+        return count
+
+    def list_items(self):
+        current_node = self.head
+
+        while current_node is not None:
+            print(current_node.data)
+            current_node = current_node.next
+# endregion
+
+
 if __name__ == '__main__':
-    n = 4
-    lookup = [None] * (n+1)
-    print(ways_to_climb_using_dp_memoization(n, lookup))
+    linked_list = SinglyLinkedList()
+    linked_list.add_list_item(10)
+    linked_list.add_list_item(11)
+    linked_list.add_list_item(12)
+    linked_list.add_list_item(13)
+    linked_list.add_list_item(14)
+    linked_list.list_items()
+    linked_list.remove_list_item(13)
+    print('doom')
+    linked_list.list_items()
+    print(linked_list.list_length())
+

@@ -456,7 +456,7 @@ class DoublyLinkedList:
 
 
 # region Hare and Tortoise algo for finding cyclic dependency in linked list
-
+# TODO
 
 def hare_and_tortoise_algo():
     pass
@@ -501,9 +501,6 @@ def maxStreak(m, n, data):
             res = max(res, count)
             count = 0
     return max(count, res)
-
-
-
 #endregion
 
 if __name__ == '__main__':

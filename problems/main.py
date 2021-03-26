@@ -24,6 +24,10 @@
 #
 # Note: Your range should be inclusive of the limits.
 
+import math
+from typing import List
+
+
 def kaprekarNumbers(p, q):
     kNos = []
     for n in range(p, q + 1):
@@ -34,7 +38,8 @@ def kaprekarNumbers(p, q):
             n_sq = n * n
             str_n_sq = str(n_sq)
             right = int(str_n_sq[-d:])
-            left = 0 if str_n_sq[0:len(str_n_sq) - d] == '' else int(str_n_sq[0:len(str_n_sq) - d])
+            left = 0 if str_n_sq[0:len(
+                str_n_sq) - d] == '' else int(str_n_sq[0:len(str_n_sq) - d])
 
             if left != 0 and right != 0 and left + right == n:
                 kNos += [n]
@@ -43,8 +48,6 @@ def kaprekarNumbers(p, q):
         print('INVALID RANGE')
     else:
         print(' '.join(map(str, kNos)))
-
-
 
 
 # endregion
@@ -105,17 +108,20 @@ def nonDivisibleSubset(k, s):
     count += min(rem_lst[0], 1)
 
     # handle other cases
-    for i in range(1, k // 2 + 1):  # here divide by 2 is to make sure we don't repeat cases again.
+    # here divide by 2 is to make sure we don't repeat cases again.
+    for i in range(1, k // 2 + 1):
         if i != k - i:
             count += max(rem_lst[i], rem_lst[k-i])
         else:
-            count += 1 if rem_lst[i] > 0 else 0  # case to handle scenarios where value sum = k.
+            # case to handle scenarios where value sum = k.
+            count += 1 if rem_lst[i] > 0 else 0
 
     return count
 
 # endregion
 
 # region matching
+
 
 def appendAndDelete(s, t, k):
     s = str(s)
@@ -125,7 +131,7 @@ def appendAndDelete(s, t, k):
         if s[i] != t[i]:
             break
     i += 1
-    diff = len(s) - i + len(t) -i
+    diff = len(s) - i + len(t) - i
     return 'Yes' if (k >= diff and (k - diff) % 2 == 0) or (len(s) + len(t) <= k) else 'No'
 
 # endregion
@@ -144,7 +150,8 @@ def repeatedString(s, n):
     return s.count('a') * (n // len(s)) + s[:n % len(s)].count('a')
 # endregion
 
-#region Magic numbers
+# region Magic numbers
+
 
 def formingMagicSquare(s):
     total_sum = []
@@ -168,12 +175,13 @@ def formingMagicSquare(s):
 
     return min(total_sum)
 
-#endregion
+# endregion
 
-#region Encyrption
+# region Encyrption
+
 
 # Complete the encryption function below.
-import math
+
 
 def encryption(s):
     s = s.replace(' ', '')
@@ -197,7 +205,8 @@ def encryption(s):
         rows = []
         while col_idx < col:
             col_gap = row_idx * col
-            rows += [s[col_idx + col_gap]] if (col_idx + col_gap) < len(s) else ''
+            rows += [s[col_idx + col_gap]
+                     ] if (col_idx + col_gap) < len(s) else ''
             col_idx += 1
         row_idx += 1
         input_rows += [rows]
@@ -217,7 +226,7 @@ def encryption(s):
     return output
 
 
-#endregion
+# endregion
 
 # Breaking the palindrome:
 #
@@ -241,9 +250,9 @@ def breakPalindrome(input):
         if input[idx] != 'a':
             return input[0: idx] + 'a' + input[idx+1:]
     return input[0: input_len-1] + 'b'
-#endregion
+# endregion
 
-#region Minium Window Substring
+# region Minium Window Substring
 #
 # Given two strings s and t, return the minimum window in s which will contain all the characters in t. If there is no such window in s that covers all characters in t, return the empty string "".
 #
@@ -260,19 +269,17 @@ def breakPalindrome(input):
 # Output: "a"
 #
 
+
 def get_min_window(s, t):
     if s == t:
         return s
 
     left, right = 0, 0
 
-
-
     # if t not in s[left, right]:
 
 
-
-#endregion
+# endregion
 
 
 # region synup interview question
@@ -316,12 +323,15 @@ def ways_to_climb_using_dp_tabulation(n):
     return res
 
 # memoization:
+
+
 def ways_to_climb_using_dp_memoization(n, lookup):
     if n <= 1:
         lookup[n] = 1
 
     if lookup[n] is None:
-        lookup[n] = ways_to_climb_using_dp_memoization(n-1, lookup) + ways_to_climb_using_dp_memoization(n - 2, lookup)
+        lookup[n] = ways_to_climb_using_dp_memoization(
+            n-1, lookup) + ways_to_climb_using_dp_memoization(n - 2, lookup)
 
     return lookup[n]
 # endregion
@@ -333,6 +343,7 @@ class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
+
 
 class DoublyListNode:
     def __init__(self, data):
@@ -353,7 +364,7 @@ class SinglyLinkedList:
         if self.head is None:
             self.head = item
         else:
-            self.tail.next = item # this is using the Node's next property
+            self.tail.next = item  # this is using the Node's next property
 
         self.tail = item
 
@@ -491,6 +502,8 @@ def hare_and_tortoise_algo():
 # NYY
 # Sample output 1:
 # 0
+
+
 def maxStreak(m, n, data):
     count = 0
     res = 0
@@ -501,13 +514,59 @@ def maxStreak(m, n, data):
             res = max(res, count)
             count = 0
     return max(count, res)
-#endregion
+# endregion
+# region
+# Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+
+# Example 1:
+
+# Input: nums1 = [1,3], nums2 = [2]
+# Output: 2.00000
+# Explanation: merged array = [1,2,3] and median is 2.
+
+# Example 2:
+
+# Input: nums1 = [1,2], nums2 = [3,4]
+# Output: 2.50000
+# Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+
+# Example 3:
+
+# Input: nums1 = [0,0], nums2 = [0,0]
+# Output: 0.00000
+
+# Example 4:
+
+# Input: nums1 = [], nums2 = [1]
+# Output: 1.00000
+
+# Example 5:
+
+# Input: nums1 = [2], nums2 = []
+# Output: 2.00000
+
+# complexity ?? TODO
+def findMedianSortedArrays(nums1: List[int], nums2: List[int]) -> float:
+    m = len(nums1)
+    n = len(nums2)
+    median = 0
+    if m == 1 and n == 0:
+        median = nums1[0]
+    elif m == 0 and n == 1:
+        median = nums2[0]
+    else:
+        final_list = nums1 + nums2
+        c = len(final_list)
+        index = c // 2
+        if c % 2:
+            median = sorted(final_list)[index]
+        else:
+            median = sum(sorted(final_list)[index-1:index+1]) / 2
+    return median
+# endregion
+
 
 if __name__ == '__main__':
-   m = 2
-   n = 2
-   data = ["YN", "NN"]
-   print(maxStreak(m, n, data))
-
-
-
+    nums1 = [1, 2, 3, 9]
+    nums2 = [3, 4]
+    print(findMedianSortedArrays(nums1, nums2))

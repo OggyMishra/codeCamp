@@ -594,13 +594,59 @@ def findEvenNumberOfDigits(nums: List[int]) -> int:
 def findEvenNumberOfDigits2(nums: List[int]) -> int:
     count = 0
     return sum([len(str(num)) % 2 ==0 for num in nums])
-    
+
+# endregion 
+
+# region 
+
+# Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+
+# Input: nums = [-4,-1,0,3,10]
+# Output: [0,1,9,16,100]
+# Explanation: After squaring, the array becomes [16,1,0,9,100].
+# After sorting, it becomes [0,1,9,16,100].
 
 
+def sortedSquares(nums: List[int]) -> List[int]:
+    res = [num * num for num in nums]
+    res.sort(reverse=False)
+    return res
+
+def sortedSquares2(nums: List[int]) -> List[int]:
+    return [num * num for num in nums].sort(reverse=False)
+
+# endregion
+
+# region 
+
+# Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.
+
+# Note that elements beyond the length of the original array are not written.
+
+# Input: [1,0,2,3,0,4,5,0]
+# Output: null
+# Explanation: After calling your function, the input array is modified to: [1,0,0,2,3,0,0,4]
+
+def duplicateZeros(arr: List[int]) -> None:
+        """
+        Do not return anything, modify arr in-place instead.
+        """
+        i = 0
+        n = len(arr)
+        while i < n -1:
+            if arr[i] == 0:
+                print(arr[:i+1]+ [0] + arr[i+1: n-1])
+                print(arr[:])
+                arr[:] = arr[:i+1]+ [0] + arr[i+1: n-1]
+                i +=1
+            i +=1
+        print(arr)
+
+      
 
 # endregion 
 
 if __name__ == '__main__':
-    input = [22, 33, 445, 56321, 98987]
-    res = findEvenNumberOfDigits2(input)
+    input =  [1,0,2,3,0,4,5,0]
+    res = duplicateZeros(input)
     print(res)

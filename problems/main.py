@@ -566,7 +566,41 @@ def findMedianSortedArrays(nums1: List[int], nums2: List[int]) -> float:
 # endregion
 
 
+# region
+
+# Find Numbers with Even Number of Digits
+# Given an array nums of integers, return how many of them contain an even number of digits. 
+# Input: nums = [12,345,2,6,7896]
+# Output: 2
+# Explanation: 
+# 12 contains 2 digits (even number of digits). 
+# 345 contains 3 digits (odd number of digits). 
+# 2 contains 1 digit (odd number of digits). 
+# 6 contains 1 digit (odd number of digits). 
+# 7896 contains 4 digits (even number of digits). 
+# Therefore only 12 and 7896 contain an even number of digits.
+
+def findEvenNumberOfDigits(nums: List[int]) -> int:
+    count = 0
+    for num in nums:
+        length = 0
+        while num:
+            num = num // 10
+            length += 1
+        if length % 2 == 0:
+            count += 1
+    return count
+
+def findEvenNumberOfDigits2(nums: List[int]) -> int:
+    count = 0
+    return sum([len(str(num)) % 2 ==0 for num in nums])
+    
+
+
+
+# endregion 
+
 if __name__ == '__main__':
-    nums1 = [1, 2, 3, 9]
-    nums2 = [3, 4]
-    print(findMedianSortedArrays(nums1, nums2))
+    input = [22, 33, 445, 56321, 98987]
+    res = findEvenNumberOfDigits2(input)
+    print(res)

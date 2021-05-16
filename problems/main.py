@@ -662,6 +662,20 @@ def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     print(nums1)
         
 # endregion
+
+# region RemoveElement
+# Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+# Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+# The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+# Input: nums = [3,2,2,3], val = 3
+# Output: 2, nums = [2,2]
+def removeElement(nums: List[int], val: int) -> int:
+    nums[:] = [num for num in nums if num != val]
+    return len(nums)
+
+# endregion
+
+
 if __name__ == '__main__':
     nums1 = [1,2,3,0,0,0]
     m = 3

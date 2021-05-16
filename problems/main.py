@@ -633,19 +633,19 @@ def sortedSquares2(nums: List[int]) -> List[int]:
 
 
 def duplicateZeros(arr: List[int]) -> None:
-        """
-        Do not return anything, modify arr in-place instead.
-        """
-        i = 0
-        n = len(arr)
-        while i < n - 1:
-            if arr[i] == 0:
-                print(arr[:i+1] + [0] + arr[i+1: n-1])
-                print(arr[:])
-                arr[:] = arr[:i+1] + [0] + arr[i+1: n-1]
-                i += 1
+    """
+    Do not return anything, modify arr in-place instead.
+    """
+    i = 0
+    n = len(arr)
+    while i < n - 1:
+        if arr[i] == 0:
+            print(arr[:i+1] + [0] + arr[i+1: n-1])
+            print(arr[:])
+            arr[:] = arr[:i+1] + [0] + arr[i+1: n-1]
             i += 1
-        print(arr)
+        i += 1
+    print(arr)
 
 
 # endregion
@@ -688,6 +688,7 @@ def removeElement(nums: List[int], val: int) -> int:
 # Output: 2, nums = [1,2]
 # Explanation: Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the returned length.
 
+
 def removeDuplicates(nums: List[int]) -> int:
     hare = 0
     tortoise = 0
@@ -696,11 +697,39 @@ def removeDuplicates(nums: List[int]) -> int:
             tortoise += 1
             nums[tortoise] = nums[hare]
         hare += 1
-                
+
     return tortoise + 1
-    
+
 # endregion
 
+# region
+# Given an array arr of integers, check if there exists two integers N and M such that N is the double of M ( i.e. N = 2 * M).
+
+# Input: arr = [10,2,5,3]
+# Output: true
+# Explanation: N = 10 is the double of M = 5,that is, 10 = 2 * 5.
+
+
+def checkIfExist(arr: List[int]) -> bool:
+    element_map = {num: idx for idx, num in enumerate(arr)}
+    for idx, num in enumerate(element_map):
+        if num * 2 in element_map and idx != element_map[num * 2]:
+            return True
+    return False
+
+
+def checkIfExist2(self, arr: List[int]) -> bool:
+    elements = dict()
+    i = 0
+    while i < len(arr):
+        if arr[i] * 2 in elements or (arr[i] % 2 == 0 and arr[i] / 2 in elements):
+            return True
+        else:
+            elements[arr[i]] = i
+        i += 1
+    return False
+# endregion
+
+
 if __name__ == '__main__':
-    removeDuplicates([0,0,1,1,1,2,2,3,3,4])
-    
+    print(checkIfExist([10, 2, 5, 3]))

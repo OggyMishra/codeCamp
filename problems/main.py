@@ -546,6 +546,8 @@ def maxStreak(m, n, data):
 # Output: 2.00000
 
 # complexity ?? TODO
+
+
 def findMedianSortedArrays(nums1: List[int], nums2: List[int]) -> float:
     m = len(nums1)
     n = len(nums2)
@@ -569,15 +571,15 @@ def findMedianSortedArrays(nums1: List[int], nums2: List[int]) -> float:
 # region
 
 # Find Numbers with Even Number of Digits
-# Given an array nums of integers, return how many of them contain an even number of digits. 
+# Given an array nums of integers, return how many of them contain an even number of digits.
 # Input: nums = [12,345,2,6,7896]
 # Output: 2
-# Explanation: 
-# 12 contains 2 digits (even number of digits). 
-# 345 contains 3 digits (odd number of digits). 
-# 2 contains 1 digit (odd number of digits). 
-# 6 contains 1 digit (odd number of digits). 
-# 7896 contains 4 digits (even number of digits). 
+# Explanation:
+# 12 contains 2 digits (even number of digits).
+# 345 contains 3 digits (odd number of digits).
+# 2 contains 1 digit (odd number of digits).
+# 6 contains 1 digit (odd number of digits).
+# 7896 contains 4 digits (even number of digits).
 # Therefore only 12 and 7896 contain an even number of digits.
 
 def findEvenNumberOfDigits(nums: List[int]) -> int:
@@ -591,13 +593,14 @@ def findEvenNumberOfDigits(nums: List[int]) -> int:
             count += 1
     return count
 
+
 def findEvenNumberOfDigits2(nums: List[int]) -> int:
     count = 0
-    return sum([len(str(num)) % 2 ==0 for num in nums])
+    return sum([len(str(num)) % 2 == 0 for num in nums])
 
-# endregion 
+# endregion
 
-# region 
+# region
 
 # Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
 
@@ -612,12 +615,13 @@ def sortedSquares(nums: List[int]) -> List[int]:
     res.sort(reverse=False)
     return res
 
+
 def sortedSquares2(nums: List[int]) -> List[int]:
     return [num * num for num in nums].sort(reverse=False)
 
 # endregion
 
-# region 
+# region
 
 # Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.
 
@@ -627,27 +631,27 @@ def sortedSquares2(nums: List[int]) -> List[int]:
 # Output: null
 # Explanation: After calling your function, the input array is modified to: [1,0,0,2,3,0,0,4]
 
+
 def duplicateZeros(arr: List[int]) -> None:
         """
         Do not return anything, modify arr in-place instead.
         """
         i = 0
         n = len(arr)
-        while i < n -1:
+        while i < n - 1:
             if arr[i] == 0:
-                print(arr[:i+1]+ [0] + arr[i+1: n-1])
+                print(arr[:i+1] + [0] + arr[i+1: n-1])
                 print(arr[:])
-                arr[:] = arr[:i+1]+ [0] + arr[i+1: n-1]
-                i +=1
-            i +=1
+                arr[:] = arr[:i+1] + [0] + arr[i+1: n-1]
+                i += 1
+            i += 1
         print(arr)
 
-      
 
-# endregion 
+# endregion
 
 
-# region 
+# region
 # Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
 # The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has a size equal to m + n such that it has enough space to hold additional elements from nums2.
 # e.g1: Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
@@ -660,7 +664,7 @@ def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     nums1[:] = nums1[:m] + nums2[:n]
     nums1.sort(reverse=False)
     print(nums1)
-        
+
 # endregion
 
 # region RemoveElement
@@ -669,16 +673,34 @@ def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
 # The order of elements can be changed. It doesn't matter what you leave beyond the new length.
 # Input: nums = [3,2,2,3], val = 3
 # Output: 2, nums = [2,2]
+
+
 def removeElement(nums: List[int], val: int) -> int:
     nums[:] = [num for num in nums if num != val]
     return len(nums)
 
 # endregion
 
+# region RemoveDuplicate
+
+# Given a sorted array nums, remove the duplicates in-place such that each element appears only once and returns the new length.
+# Input: nums = [1,1,2]
+# Output: 2, nums = [1,2]
+# Explanation: Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the returned length.
+
+def removeDuplicates(nums: List[int]) -> int:
+    hare = 0
+    tortoise = 0
+    while hare < len(nums):
+        if nums[hare] != nums[tortoise]:
+            tortoise += 1
+            nums[tortoise] = nums[hare]
+        hare += 1
+                
+    return tortoise + 1
+    
+# endregion
 
 if __name__ == '__main__':
-    nums1 = [1,2,3,0,0,0]
-    m = 3
-    n = 3
-    nums2 = [2,5,6]
-    merge(nums1, m, nums2, n)
+    removeDuplicates([0,0,1,1,1,2,2,3,3,4])
+    

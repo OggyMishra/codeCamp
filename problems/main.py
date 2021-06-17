@@ -730,6 +730,91 @@ def checkIfExist2(self, arr: List[int]) -> bool:
     return False
 # endregion
 
+# region
+
+# Given an array of integers arr, return true if and only if it is a valid mountain array.
+
+# Recall that arr is a mountain array if and only if:
+
+#     arr.length >= 3
+#     There exists some i with 0 < i < arr.length - 1 such that:
+#         arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+#         arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+
+# e.g 0,2,3,4,5,2,1,0 Mountain array
+# e.g 0,2,3,3,5,2,1,0 No strictly increasing so not a mountain array.
+
+# endregion
+
+# region
+# Maximum size square sub-matrix with all 1s
+# Given a binary matrix, find out the maximum size square sub-matrix with all 1s. 
+# For example, consider the below binary matrix. 
+#   0 1 1 0 1
+#   1 1 0 1 0
+#   0 1 1 1 0
+#   1 1 1 1 0
+#   1 1 1 1 1
+#   0 0 0 0 0
+
+# n = [
+#         [0, 1, 1, 0, 1],
+#         [1, 1, 0, 1, 0],
+#         [0, 1, 1, 1, 0],
+#         [1, 1, 1, 1, 0],
+#         [1, 1, 1, 1, 1],
+#         [0, 0, 0, 0, 0],
+#     ]
+#     print(max_square_matrix(n))
+def max_square_matrix(n):
+    ans = 0
+    rows = len(n)
+    cols = len(n[0])
+
+    dp = [[0 for k in range(cols)] for l in range(rows)]
+    for i in range(rows -1, 0, -1):
+        for j in range(cols - 1, 0, -1):
+            if i == rows -1 and j == cols - 1:
+                dp[i][j] = 0
+            elif i == rows -1:
+                dp[i][j] = 0
+            elif j == cols - 1:
+                dp[i][j] = 0
+            else:
+                if n[i][j] == 0:
+                    dp[i][j] = 0
+                else:
+                    min_val = min(dp[i][j+1], dp[i+1][j])
+                    min_val = min(min_val, dp[i+1][j+1])
+                    dp[i][j] = min_val + 1
+                    if dp[i][j] > ans:
+                        ans = dp[i][j]
+    return ans
+
+# endregion
+
+# region reverse string
+
+def reversed_str(s):
+    s = s[::-1]
+    return s
+# endregion
 
 if __name__ == '__main__':
-    print(checkIfExist([10, 2, 5, 3]))
+    print(reversed_str("chitra"))
+
+# TODO: write programs for these problems
+# given an array {2, 3, 1, 0} find element such that A[i]>A[j] and i<j.
+# 1. Given a binary matrix, find out the maximum size square sub-matrix with all 1s. done.
+# 2. Write a program to count occurrence of each character in a string. done.
+# 3. Write a program for Trim function. use regex re.sub("^\s+|\s+$").
+# 4. Find middle element of linked list?: done. Write code for it whenever you got time.
+# 5. Reverse all the words in a string. done
+# 6. Program to get the 2nd most frequent character of string.
+# 7. Program to demonstrate rtrim() method.
+# 8. two stack in one array
+# 9. max occurence of character
+# 10. convert number in Excel column like 27 is AA and 10 is J: done
+# 11. find pair of given sum in array
+# 12. Implement the Merge step of the merge sort algorithm (very basic)
+# 13. 
